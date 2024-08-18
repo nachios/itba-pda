@@ -4,7 +4,6 @@ version = "0.1.0"
 description = ""
 authors = ["Tato"]
 readme = "README.md"
-packages = [{include = "pda"}]
 
 [tool.poetry.dependencies]
 python = "^3.10"
