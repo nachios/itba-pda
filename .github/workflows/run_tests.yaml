@@ -15,12 +15,12 @@ jobs:
       with:
         python-version: 3.10.12
     - name: Install Poetry
-      run: |
+      run: 
         curl -sSL https://install.python.poetry.org | python3 -
     - name: Install Dependencies
-      run: |
+      run: 
         poetry install
     - name: Run pytest
-      run: |
+      run: 
         cd tests
         poetry run pytest tests
