@@ -1,5 +1,6 @@
-from unittest.mock import patch, MagicMock
+from unittest.mock import patch
 import get_weather
+
 
 @patch('get_weather.requests.get')
 def test_get_weather_url(mock_get):
@@ -13,14 +14,16 @@ def test_get_weather_url(mock_get):
     # Get the actual URL that was called
     actual_url = mock_get.call_args[0][0]
 
-    # Assert that requests.get was called with the correct URL and include a custom error message
-    assert actual_url == expected_url, f"The URL requested: {actual_url}, is not the expected result: {expected_url}"
+    # Assert that requests.get was called with the correct URL
+    # and include a custom error message
+    assert actual_url == expected_url, \
+        f"The URL requested: {actual_url}, is not the expected result: {expected_url}"
+
 
 @patch('get_weather.requests.get')
 def test_get_weather_response(mock_get):
     lat = 38.8894
     long = -77.0352
-    
     # Define the full expected result as a dictionary
     expected_response = {
         "@context": [
@@ -119,13 +122,10 @@ def test_get_weather_response(mock_get):
 
     # Configure the mock to return this expected response
     mock_get.return_value.json.return_value = expected_response
-    
     # The specific part of the expected response that you want to test
     expected_forecast_hourly_url = expected_response['properties']['forecastHourly']
-    
     # Call the function
     actual_result = get_weather.get_weather(lat, long)
-    
     # Assert that the actual result matches the expected forecastHourly URL
     assert actual_result == expected_forecast_hourly_url, (
         f'Expected {expected_forecast_hourly_url}, but got {actual_result} instead.'
