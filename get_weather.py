@@ -1,4 +1,6 @@
 import requests
+
+
 def get_weather(lat, long):
     """
     Fetch and return the relative location's properties for the specified
